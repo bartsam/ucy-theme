@@ -1,0 +1,17 @@
+{
+  "name": "ucy-theme",
+  "type": "module",
+  "scripts": {
+    "dev": "rm -f .dev && touch .dev && vite",
+    "build": "rm -f .dev && vite build",
+    "bundle": "zip -r ucy-theme.zip . -x \"node_modules/*\" \"src/*\" \".env\" \".git/*\" \"package*\" \"vite.config.js\" \"tailwind.config.js\" \"postcss.config.js\" \".gitignore\" \"*.zip\"",
+    "export": "npm run build && npm run bundle"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.0",
+    "vite-plugin-live-reload": "^3.0.5"
+  }
+}

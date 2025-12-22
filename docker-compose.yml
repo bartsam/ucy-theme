@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: ucy_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${USER}
+      MYSQL_PASSWORD: ${PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    container_name: ucy_wordpress
+    restart: always
+    ports:
+      - "${PORT}:80"
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: ${USER}
+      WORDPRESS_DB_PASSWORD: ${PASSWORD}
+      WORDPRESS_DB_NAME: ${DATABASE}
+    volumes:
+      - wp_core:/var/www/html
+      - .:/var/www/html/wp-content/themes/ucy-theme
+
+volumes:
+  db_data:
+  wp_core:
